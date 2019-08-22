@@ -1,18 +1,10 @@
-// Version du GLSL
+#version 410 core
 
-#version 150 core
-
-
-// Sortie Shader
+uniform vec4 vertex_color;
 
 out vec4 out_Color;
 
-
-// Fonction main
-
 void main()
 {
-    // Couleur finale du pixel
-
-    out_Color = vec4(1.0, 1.0, 1.0, 1.0);
+	out_Color = vertex_color;
 }

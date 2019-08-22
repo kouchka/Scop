@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/06/30 16:11:38 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/22 17:02:40 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SCOP_H
 
 # include "libui.h"
+# include <time.h>
 # include <GL/glew.h>
 
 # define TETA 0.2
@@ -31,6 +32,7 @@ typedef struct		s_scop
 	uint32_t		**triangle;
 	uint32_t		point_number;
 	uint32_t		link_number;
+	float				vecs[16];
 }									t_scop;
 
 /*
@@ -51,8 +53,7 @@ uint32_t		ft_run(t_scop *env);
 ** event functions
 */
 
-uint32_t		ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state,
-													float *vertices);
+uint32_t		ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state);
 
 /*
 ** matrix calculation
@@ -67,6 +68,6 @@ uint32_t		ft_rotate(t_scop *env, float *vertices, float x, float y, float z);
 */
 
 void				ft_print_table(t_scop *env);
-
+void				ft_check_mat4(float *mat4);
 
 #endif
