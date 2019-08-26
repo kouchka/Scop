@@ -6,7 +6,7 @@
 #    By: allallem <allallem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/25 14:33:47 by allallem          #+#    #+#              #
-#    Updated: 2019/08/26 14:16:26 by allallem         ###   ########.fr        #
+#    Updated: 2019/08/26 15:03:42 by allallem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,11 @@ SRC		= main.c\
 				tests_functions.c\
 				ft_scop.c\
 				ft_run.c\
-				ft_keys_event.c
+				ft_keys_event.c\
+				ft_mat4_multiplication.c\
+				ft_update_opengl.c\
+				ft_shader_functions.c\
+				ft_load_source.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC))
 

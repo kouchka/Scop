@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/26 14:15:26 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/26 15:03:31 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct			s_scop
 
 int32_t			ft_allocate_env(t_scop *env);
 int32_t			ft_fill_env(t_scop *env, char *file_name);
+char				*LoadSource(const char *filename);
 
 /*
 ** initialisation + running
@@ -60,6 +61,16 @@ int32_t			ft_fill_env(t_scop *env, char *file_name);
 
 uint32_t		ft_scop(t_scop *env, char *name);
 uint32_t		ft_run(t_scop *env);
+void				ft_update_data(t_scop *env, GLuint program);
+
+/*
+** shader/program functions
+*/
+
+uint32_t		ft_create_shader(GLuint *shader, char *file_name,
+		GLint compile_status, GLuint options);
+uint32_t		ft_create_program(GLuint *program, GLuint *vertex, GLuint *frag,
+		GLint compile_status);
 
 /*
 ** event functions
