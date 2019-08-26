@@ -74,7 +74,7 @@ lldb:
 	$(CC) -o $(NAME) $(SRCS) $^ $(CFLAGS) $(DEB) $(LIB) $(LIBX)
 
 fclean:clean
-	@make -C libft fclean
+	make -C libft fclean
 	@$(DEL) $(NAME)
 
 clean:

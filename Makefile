@@ -6,7 +6,7 @@
 #    By: allallem <allallem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/25 14:33:47 by allallem          #+#    #+#              #
-#    Updated: 2019/08/26 15:03:42 by allallem         ###   ########.fr        #
+#    Updated: 2019/08/26 15:10:52 by allallem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ lldb:
 
 fclean:clean
 	make -C libui fclean
-	@$(DEL) $(NAME)
+	$(DEL) $(NAME)
 
 clean:
 	@$(DEL) $(OBJ)
