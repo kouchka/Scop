@@ -6,7 +6,7 @@
 #    By: allallem <allallem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/25 14:33:47 by allallem          #+#    #+#              #
-#    Updated: 2019/06/29 16:49:48 by allallem         ###   ########.fr        #
+#    Updated: 2019/08/26 14:16:26 by allallem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,7 @@ SRC		= main.c\
 				tests_functions.c\
 				ft_scop.c\
 				ft_run.c\
-				ft_keys_event.c\
-				ft_translate.c\
-				ft_homothetie.c\
-				ft_rotate.c
+				ft_keys_event.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC))
 

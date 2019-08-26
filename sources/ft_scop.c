@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 13:30:31 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/22 16:13:49 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/26 12:47:41 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,26 @@ uint32_t			ft_init_window(t_scop *env, char *name)
 
 void					ft_assign_vecs(t_scop *env)
 {
-	env->vecs[0] = 1.0;
-	env->vecs[1] = 0.0;
-	env->vecs[2] = 0.0;
-	env->vecs[3] = 0.0;
-	env->vecs[4] = 0.0;
-	env->vecs[5] = 1.0;
-	env->vecs[6] = 0.0;
-	env->vecs[7] = 0.0;
-	env->vecs[8] = 0.0;
-	env->vecs[9] = 0.0;
-	env->vecs[10] = 1.0;
-	env->vecs[11] = 0.0;
-	env->vecs[12] = 0.0;
-	env->vecs[13] = 0.0;
-	env->vecs[14] = 0.0;
-	env->vecs[15] = 1.0;	
+	env->trans.vecs[0] = 1.0;
+	env->trans.vecs[5] = 1.0;
+	env->trans.vecs[10] = 1.0;
+	env->trans.vecs[15] = 1.0;
+	env->trans.rotatex[0] = 1.0;
+	env->trans.rotatex[5] = 1.0;
+	env->trans.rotatex[10] = 1.0;
+	env->trans.rotatex[15] = 1.0;
+	env->trans.rotatey[0] = 1.0;
+	env->trans.rotatey[5] = 1.0;
+	env->trans.rotatey[10] = 1.0;
+	env->trans.rotatey[15] = 1.0;
+	env->trans.rotatez[0] = 1.0;
+	env->trans.rotatez[5] = 1.0;
+	env->trans.rotatez[10] = 1.0;
+	env->trans.rotatez[15] = 1.0;
+	env->trans.rotate[0] = 1.0;
+	env->trans.rotate[5] = 1.0;
+	env->trans.rotate[10] = 1.0;
+	env->trans.rotate[15] = 1.0;
 }
 
 uint32_t			ft_scop(t_scop *env, char *name)

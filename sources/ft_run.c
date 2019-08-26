@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:26:41 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/22 17:03:52 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/26 14:13:29 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,38 @@ uint32_t			ft_create_program(GLuint *program, GLuint *vertex, GLuint *frag,
 	return (1);
 }
 
+void					ft_mat4_multiplication(float *m, float *m1, float *m2)
+{
+	m[0] = (m1[0] * m2[0]) + (m1[1] * m2[4]) + (m1[2] * m2[8]) + (m1[3] * m2[12]);
+	m[1] = (m1[0] * m2[1]) + (m1[1] * m2[5]) + (m1[2] * m2[9]) + (m1[3] * m2[13]);
+	m[2] = (m1[0] * m2[2]) + (m1[1] * m2[6]) + (m1[2] * m2[10]) + (m1[3] * m2[14]);
+	m[3] = (m1[0] * m2[3]) + (m1[1] * m2[7]) + (m1[2] * m2[11]) + (m1[3] * m2[15]);
+	m[4] = (m1[4] * m2[0]) + (m1[5] * m2[4]) + (m1[6] * m2[8]) + (m1[7] * m2[12]);
+	m[5] = (m1[4] * m2[1]) + (m1[5] * m2[5]) + (m1[6] * m2[9]) + (m1[7] * m2[13]);
+	m[6] = (m1[4] * m2[2]) + (m1[5] * m2[6]) + (m1[6] * m2[10]) + (m1[7] * m2[14]);
+	m[7] = (m1[4] * m2[3]) + (m1[5] * m2[7]) + (m1[6] * m2[11]) + (m1[7] * m2[15]);
+	m[8] = (m1[8] * m2[0]) + (m1[9] * m2[4]) + (m1[10] * m2[8]) + (m1[11] * m2[12]);
+	m[9] = (m1[8] * m2[1]) + (m1[9] * m2[5]) + (m1[10] * m2[9]) + (m1[11] * m2[13]);
+	m[10] = (m1[8] * m2[2]) + (m1[9] * m2[6]) + (m1[10] * m2[10]) + (m1[11] * m2[14]);
+	m[11] = (m1[8] * m2[3]) + (m1[9] * m2[7]) + (m1[10] * m2[11]) + (m1[11] * m2[15]);
+	m[12] = (m1[12] * m2[0]) + (m1[13] * m2[4]) + (m1[14] * m2[8]) + (m1[15] * m2[12]);
+	m[13] = (m1[12] * m2[1]) + (m1[13] * m2[5]) + (m1[14] * m2[9]) + (m1[15] * m2[13]);
+	m[14] = (m1[12] * m2[2]) + (m1[13] * m2[6]) + (m1[14] * m2[10]) + (m1[15] * m2[14]);
+	m[15] = (m1[12] * m2[3]) + (m1[13] * m2[7]) + (m1[14] * m2[11]) + (m1[15] * m2[15]);
+}
+
+void					ft_update_rotate(t_scop *env, GLuint program)
+{
+	GLint	id;
+	float	rotatetmp[16];
+
+	ft_mat4_multiplication(env->trans.rotate, env->trans.rotatex, env->trans.rotatey);
+	memcpy(&rotatetmp, &env->trans.rotate, sizeof(float) * 16);
+	ft_mat4_multiplication(env->trans.rotate, rotatetmp, env->trans.rotatez);
+	id = glGetUniformLocation(program, "rotate");
+	glUniformMatrix4fv(id, 1, GL_FALSE, env->trans.rotate);
+}
+
 void					ft_update_data(t_scop *env, GLuint program)
 {
 	uint32_t vertexColorLocation;
@@ -144,7 +176,8 @@ void					ft_update_data(t_scop *env, GLuint program)
 	timeValue = SDL_GetTicks() / 120;
 	greenValue = (sin(timeValue) / 2.0f) + 0.5f;
 	glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
-	glUniformMatrix4fv(id, 1, GL_FALSE, env->vecs);
+	glUniformMatrix4fv(id, 1, GL_FALSE, env->trans.vecs);
+	ft_update_rotate(env, program);
 }
 
 uint32_t			ft_run(t_scop *env)
@@ -177,16 +210,16 @@ uint32_t			ft_run(t_scop *env)
 		ft_printf("Error while malloc vertices\n");
 		return (0);
 	}
-	vertices[0] = -0.5f;
-	vertices[1] = -0.5f;
-	vertices[2] = 0.0f;
-	vertices[3] = 0.5f;
-	vertices[4] = -0.5f;
-	vertices[5] = 0.0f;
-	vertices[6] = 0.0f;
-	vertices[7] = 0.5f;
-	vertices[8] = 0.0f;
-	// ft_attribute_vertices(env, vertices);
+	// vertices[0] = -0.5f;
+	// vertices[1] = -0.5f;
+	// vertices[2] = 0.0f;
+	// vertices[3] = 0.5f;
+	// vertices[4] = -0.5f;
+	// vertices[5] = 0.0f;
+	// vertices[6] = 0.0f;
+	// vertices[7] = 0.5f;
+	// vertices[8] = 0.0f;
+	ft_attribute_vertices(env, vertices);
 
 	GLuint VBO, VAO;
 
@@ -198,8 +231,8 @@ uint32_t			ft_run(t_scop *env)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (env->link_number * 9),
 		vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3,
-			(void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0,
+			0);
 	glEnableVertexAttribArray(0);
 	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -215,7 +248,7 @@ uint32_t			ft_run(t_scop *env)
 		glUseProgram(program);
 		ft_update_data(env, program);
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, env->link_number * 3);
 		SDL_GL_SwapWindow(env->sdl.win);
 	}
 	glDeleteProgram(program);

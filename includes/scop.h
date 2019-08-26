@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/22 17:02:40 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/26 14:15:26 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,28 @@ typedef struct		s_event
 	uint8_t run;
 }									t_event;
 
-typedef struct		s_scop
+typedef struct		s_transformation
 {
-	t_window		sdl;
-	t_event			event;
-	float				**point;
-	uint32_t		**triangle;
-	uint32_t		point_number;
-	uint32_t		link_number;
+	float				rotatex[16];
+	float				rotatey[16];
+	float				rotatez[16];
+	float				rotate[16];
 	float				vecs[16];
-}									t_scop;
+	float				anglex;
+	float				angley;
+	float				anglez;
+}									t_transformation;
+
+typedef struct			s_scop
+{
+	t_window					sdl;
+	t_event						event;
+	t_transformation	trans;
+	float							**point;
+	uint32_t					**triangle;
+	uint32_t					point_number;
+	uint32_t					link_number;
+}										t_scop;
 
 /*
 ** parsing
@@ -59,9 +71,7 @@ uint32_t		ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state);
 ** matrix calculation
 */
 
-uint32_t		ft_translate(t_scop *env, float *vertices, float x, float y, float z);
-uint32_t		ft_homothetie(t_scop *env, float *vertices, float x, float y, float z);
-uint32_t		ft_rotate(t_scop *env, float *vertices, float x, float y, float z);
+void				ft_mat4_multiplication(float *m, float *m1, float *m2);
 
 /*
 ** functions to remove (used for tests)
