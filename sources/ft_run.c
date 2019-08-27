@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:26:41 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/26 15:10:21 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/27 12:39:06 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ uint32_t			ft_run(t_scop *env)
 	GLuint frag;
 	GLuint program;
 	GLuint VBO, VAO;
+	/*SDL_Surface *texture;
+	GLuint m_id;
+	GLenum formatinterne;
+	GLenum format;*/
 
 	if (!ft_create_shader(&vertex, "Shaders/translate.vert", GL_TRUE,
 		GL_VERTEX_SHADER))
@@ -66,11 +70,51 @@ uint32_t			ft_run(t_scop *env)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (env->link_number * 9),
 		vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0,
-			0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	state = SDL_GetKeyboardState(NULL);
+	/*
+	** chargement image
+	*/
+	/*
+	if (!(texture = IMG_Load("texture.jpg")))
+	{
+		ft_printf("%s\n", SDL_GetError());
+		return (0);
+	}
+	glGenTextures(1, &m_id);
+	glBindTexture(GL_TEXTURE_2D, m_id);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	if(texture->format->BytesPerPixel == 3)
+	{
+		formatinterne = GL_RGB;
+		if(texture->format->Rmask == 0xff)
+			format = GL_RGB;
+		else
+			format = GL_BGR;
+	}
+	else if(texture->format->BytesPerPixel == 4)
+	{
+		formatinterne = GL_RGBA;
+		if(texture->format->Rmask == 0xff)
+			format = GL_RGBA;
+		else
+			format = GL_BGRA;
+	}
+	else
+	{
+		ft_printf("Erreur, format interne de l'image inconnu\n");
+		SDL_FreeSurface(texture);
+		return (0);
+	}
+	glTexImage2D(GL_TEXTURE_2D, 0, formatinterne, texture->w,
+		texture->h, 0, format, GL_UNSIGNED_BYTE, texture->pixels);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	SDL_FreeSurface(texture);
+	*/
 	while (env->event.run)
 	{
 		while (SDL_PollEvent(&e))

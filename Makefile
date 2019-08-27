@@ -6,7 +6,7 @@
 #    By: allallem <allallem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/25 14:33:47 by allallem          #+#    #+#              #
-#    Updated: 2019/08/26 15:10:52 by allallem         ###   ########.fr        #
+#    Updated: 2019/08/27 11:08:24 by allallem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ DEB =  -fsanitize=address -g
 
 DEL		=	rm -f
 
-LIB		= -L libui/libft -L libui -lft -lui -L$(HOME)/.brew/lib -L$(HOME)/.brew/Cellar/glew/2.1.0/lib -lSDL2 -lSDL2_mixer -lSDL2_ttf -framework OpenGL -lglew
+LIB		= -L libui/libft -L libui -lft -lui -L$(HOME)/.brew/lib -L$(HOME)/.brew/Cellar/glew/2.1.0/lib -lSDL2 -lSDL2_mixer -lSDL2_ttf -lSDL2_image -framework OpenGL -lglew
 
 all: init $(NAME)
 

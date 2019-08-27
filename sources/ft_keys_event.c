@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:27:42 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/26 14:07:47 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/27 09:52:49 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state)
 		env->event.run = 1;
 	if (state[SDL_SCANCODE_RIGHT])
 		env->trans.vecs[12] += env->trans.vecs[0];
-	if (state[SDL_SCANCODE_UP])
+	if (state[SDL_SCANCODE_W])
 		env->trans.vecs[13] += env->trans.vecs[0];
-	if (state[SDL_SCANCODE_DOWN])
+	if (state[SDL_SCANCODE_S])
 		env->trans.vecs[13] += -env->trans.vecs[0];
 	if (state[SDL_SCANCODE_LEFT])
 		env->trans.vecs[12] += -env->trans.vecs[0];

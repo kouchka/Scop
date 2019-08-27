@@ -1,5 +1,8 @@
 #version 410 core
 
+uniform mat4 projection;
+uniform mat4 modelview;
+
 uniform mat4 trans;
 uniform mat4 rotate;
 in vec3 vertex;
