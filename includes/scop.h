@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/26 15:03:31 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:13:35 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,18 @@
 typedef struct		s_event
 {
 	uint8_t run;
+	uint8_t rotate;
+	int32_t x;
+	int32_t y;
+
 }									t_event;
+
+typedef struct		s_time
+{
+	uint32_t		last_time;
+	uint32_t		current_time;
+	uint32_t		ellapsed_time;
+}									t_time;
 
 typedef struct		s_transformation
 {
@@ -41,6 +52,7 @@ typedef struct			s_scop
 	t_window					sdl;
 	t_event						event;
 	t_transformation	trans;
+	t_time						time;
 	float							**point;
 	uint32_t					**triangle;
 	uint32_t					point_number;

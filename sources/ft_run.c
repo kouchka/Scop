@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:26:41 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/27 12:39:06 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/31 19:21:13 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ void					ft_attribute_vertices(t_scop *env, float *vertices)
 	}
 }
 
+void					ft_rotate(t_scop *env)
+{
+	if (!env->event.rotate)
+		return ;
+	env->time.current_time = SDL_GetTicks();
+	env->time.ellapsed_time = env->time.current_time - env->time.last_time;
+	env->time.last_time = env->time.current_time;
+	env->trans.angley += env->time.ellapsed_time * 0.001;
+	env->trans.rotatey[0] = cos(env->trans.angley);
+	env->trans.rotatey[2] = -sin(env->trans.angley);
+	env->trans.rotatey[8] = sin(env->trans.angley);
+	env->trans.rotatey[10] = cos(env->trans.angley);
+}
+
 uint32_t			ft_run(t_scop *env)
 {
 	float					*vertices;
@@ -44,10 +58,10 @@ uint32_t			ft_run(t_scop *env)
 	GLuint frag;
 	GLuint program;
 	GLuint VBO, VAO;
-	/*SDL_Surface *texture;
-	GLuint m_id;
+	SDL_Surface *texture;
+	GLuint texture_id;
 	GLenum formatinterne;
-	GLenum format;*/
+	GLenum format;
 
 	if (!ft_create_shader(&vertex, "Shaders/translate.vert", GL_TRUE,
 		GL_VERTEX_SHADER))
@@ -77,15 +91,13 @@ uint32_t			ft_run(t_scop *env)
 	/*
 	** chargement image
 	*/
-	/*
-	if (!(texture = IMG_Load("texture.jpg")))
+	if (!(texture = IMG_Load("ceramique.jpg")))
 	{
 		ft_printf("%s\n", SDL_GetError());
 		return (0);
 	}
-	glGenTextures(1, &m_id);
-	glBindTexture(GL_TEXTURE_2D, m_id);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glGenTextures(1, &texture_id);
+	glBindTexture(GL_TEXTURE_2D, texture_id);
 	if(texture->format->BytesPerPixel == 3)
 	{
 		formatinterne = GL_RGB;
@@ -98,7 +110,7 @@ uint32_t			ft_run(t_scop *env)
 	{
 		formatinterne = GL_RGBA;
 		if(texture->format->Rmask == 0xff)
-			format = GL_RGBA;
+			format = GL_RGBA8;
 		else
 			format = GL_BGRA;
 	}
@@ -108,23 +120,28 @@ uint32_t			ft_run(t_scop *env)
 		SDL_FreeSurface(texture);
 		return (0);
 	}
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexImage2D(GL_TEXTURE_2D, 0, formatinterne, texture->w,
 		texture->h, 0, format, GL_UNSIGNED_BYTE, texture->pixels);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	SDL_FreeSurface(texture);
-	*/
+	glEnable(GL_DEPTH_TEST);
 	while (env->event.run)
 	{
 		while (SDL_PollEvent(&e))
 			ft_keys_event(env, e, state);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(program);
+		glBindTexture(GL_TEXTURE_2D, texture_id);
+		ft_rotate(env);
 		ft_update_data(env, program);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, env->link_number * 3);
 		SDL_GL_SwapWindow(env->sdl.win);
+		SDL_GetMouseState(&env->event.x, &env->event.y);
 	}
 	glDeleteProgram(program);
 	free(vertices);

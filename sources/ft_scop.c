@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 13:30:31 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/26 12:47:41 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/31 12:47:09 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ uint32_t			ft_scop(t_scop *env, char *name)
 		ft_quit_sdl(&env->sdl.win, &env->sdl.ren, 0);
 		return (0);
 	}
+	env->event.rotate = 1;
 	free(env->sdl.name);
 	if (!(env->sdl.cont = SDL_GL_CreateContext(env->sdl.win)))
 	{

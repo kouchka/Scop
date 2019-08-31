@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 14:22:58 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/26 14:48:11 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/31 12:51:10 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void					ft_update_rotate(t_scop *env, GLuint program)
 	GLint	id;
 	float	rotatetmp[16];
 
-	ft_mat4_multiplication(env->trans.rotate, env->trans.rotatex, env->trans.rotatey);
+	ft_mat4_multiplication(env->trans.rotate, env->trans.rotatex,
+		env->trans.rotatey);
 	memcpy(&rotatetmp, &env->trans.rotate, sizeof(float) * 16);
 	ft_mat4_multiplication(env->trans.rotate, rotatetmp, env->trans.rotatez);
 	id = glGetUniformLocation(program, "rotate");

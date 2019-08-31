@@ -6,16 +6,37 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:27:42 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/27 09:52:49 by allallem         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:22:02 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
+uint32_t			ft_rotation_mouse(t_scop *env, SDL_Event e/*, const uint8_t *state*/)
+{
+	int32_t x;
+	int32_t y;
 
+	if (e.button.button == SDL_BUTTON_LEFT)
+	{
+		SDL_GetMouseState(&x, &y);
+		env->trans.anglex += (env->event.y - y) * -0.001;
+		env->trans.rotatex[5] = cos(env->trans.anglex);
+		env->trans.rotatex[6] = sin(env->trans.anglex);
+		env->trans.rotatex[9] = -sin(env->trans.anglex);
+		env->trans.rotatex[10] = cos(env->trans.anglex);
+		env->trans.angley += (env->event.x - x) * -0.001;
+		env->trans.rotatey[0] = cos(env->trans.angley);
+		env->trans.rotatey[2] = -sin(env->trans.angley);
+		env->trans.rotatey[8] = sin(env->trans.angley);
+		env->trans.rotatey[10] = cos(env->trans.angley);
+	}
+	return (1);
+}
 
 uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state)
 {
+	ft_rotation_mouse(env, e);
 	if (state[SDL_SCANCODE_ESCAPE] || e.window.event == SDL_WINDOWEVENT_CLOSE)
 		env->event.run = 0;
 	if (e.key.type == 5)
