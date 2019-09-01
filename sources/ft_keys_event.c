@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:27:42 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/31 15:22:02 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/01 15:23:38 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,25 @@ uint32_t			ft_rotation_mouse(t_scop *env, SDL_Event e/*, const uint8_t *state*/)
 	return (1);
 }
 
-uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state)
+uint32_t			ft_homotethie(t_scop *env, SDL_Event e)
 {
-	ft_rotation_mouse(env, e);
-	if (state[SDL_SCANCODE_ESCAPE] || e.window.event == SDL_WINDOWEVENT_CLOSE)
-		env->event.run = 0;
-	if (e.key.type == 5)
-		env->event.run = 1;
-	if (state[SDL_SCANCODE_RIGHT])
-		env->trans.vecs[12] += env->trans.vecs[0];
-	if (state[SDL_SCANCODE_W])
-		env->trans.vecs[13] += env->trans.vecs[0];
-	if (state[SDL_SCANCODE_S])
-		env->trans.vecs[13] += -env->trans.vecs[0];
-	if (state[SDL_SCANCODE_LEFT])
-		env->trans.vecs[12] += -env->trans.vecs[0];
-	if (state[SDL_SCANCODE_KP_PLUS])
+	if (e.wheel.y < 0)
 	{
 		env->trans.vecs[0] += 0.02;
 		env->trans.vecs[5] += 0.02;
 		env->trans.vecs[10] += 0.02;
 	}
-	if (state[SDL_SCANCODE_KP_MINUS])
+	if (e.wheel.y > 0)
 	{
 		env->trans.vecs[0] -= 0.02;
 		env->trans.vecs[5] -= 0.02;
 		env->trans.vecs[10] -= 0.02;
 	}
+	return (1);
+}
+
+uint32_t			ft_rotate_keys(t_scop *env, const uint8_t *state)
+{
 	if (state[SDL_SCANCODE_X])
 	{
 		env->trans.anglex += 0.01;
@@ -85,5 +77,27 @@ uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state)
 		env->trans.rotatez[4] = -sin(env->trans.anglez);
 		env->trans.rotatez[5] = cos(env->trans.anglez);
 	}
+	return (1);
+}
+
+uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state)
+{
+	ft_rotation_mouse(env, e);
+	if (state[SDL_SCANCODE_ESCAPE] || e.window.event == SDL_WINDOWEVENT_CLOSE)
+		env->event.run = 0;
+	if (e.key.type == 5)
+		env->event.run = 1;
+	if (state[SDL_SCANCODE_RIGHT])
+		env->trans.vecs[12] += env->trans.vecs[0];
+	if (state[SDL_SCANCODE_W])
+		env->trans.vecs[13] += env->trans.vecs[0];
+	if (state[SDL_SCANCODE_S])
+		env->trans.vecs[13] += -env->trans.vecs[0];
+	if (state[SDL_SCANCODE_LEFT])
+		env->trans.vecs[12] += -env->trans.vecs[0];
+	if (e.type == SDL_MOUSEWHEEL)
+		return (ft_homotethie(env, e));
+	if (state[SDL_SCANCODE_X] || state[SDL_SCANCODE_Y] || state[SDL_SCANCODE_Z])
+		return (ft_rotate_keys(env, state));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:54:18 by allallem          #+#    #+#             */
-/*   Updated: 2019/06/23 16:14:37 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/01 11:43:36 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ char			*ft_parse_line(char *line, t_scop *env)
 		&tmp, &tmp, &tmp)) == 3)
 	{
 		env->point_number++;
+		return (0);
+	}
+	if (line[0] == 'f' && (sscanf(line, "f %d %d %d %d",
+		&tmp2, &tmp2, &tmp2, &tmp2)) == 4)
+	{
+		env->link_number += 2;
 		return (0);
 	}
 	if (line[0] == 'f' && (sscanf(line, "f %d %d %d",
