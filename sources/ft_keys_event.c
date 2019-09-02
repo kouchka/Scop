@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:27:42 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/01 15:23:38 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/02 16:49:39 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ uint32_t			ft_rotation_mouse(t_scop *env, SDL_Event e/*, const uint8_t *state*/)
 
 uint32_t			ft_homotethie(t_scop *env, SDL_Event e)
 {
-	if (e.wheel.y < 0)
+	if (e.wheel.y < 0 && env->trans.vecs[0] < 1.0 && env->trans.vecs[5] < 1.0
+		&& env->trans.vecs[10] < 1.0)
 	{
 		env->trans.vecs[0] += 0.02;
 		env->trans.vecs[5] += 0.02;
 		env->trans.vecs[10] += 0.02;
 	}
-	if (e.wheel.y > 0)
+	if (e.wheel.y > 0 && env->trans.vecs[0] > 0.1 && env->trans.vecs[5] > 0.1
+		&& env->trans.vecs[10] > 0.1)
 	{
 		env->trans.vecs[0] -= 0.02;
 		env->trans.vecs[5] -= 0.02;
@@ -80,6 +82,15 @@ uint32_t			ft_rotate_keys(t_scop *env, const uint8_t *state)
 	return (1);
 }
 
+uint32_t			ft_texture(t_scop *env)
+{
+	if (env->event.texture == 1)
+		env->event.texture = 0;
+	else
+		env->event.texture = 1;
+	return (1);
+}
+
 uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state)
 {
 	ft_rotation_mouse(env, e);
@@ -99,5 +110,7 @@ uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state)
 		return (ft_homotethie(env, e));
 	if (state[SDL_SCANCODE_X] || state[SDL_SCANCODE_Y] || state[SDL_SCANCODE_Z])
 		return (ft_rotate_keys(env, state));
+	if (state[SDL_SCANCODE_T] && e.key.type == SDL_KEYDOWN && !e.key.repeat)
+		return (ft_texture(env));
 	return (1);
 }

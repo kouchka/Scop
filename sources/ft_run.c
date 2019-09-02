@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:26:41 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/01 14:38:45 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/02 15:57:18 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ void					ft_rotate(t_scop *env)
 	env->trans.rotatey[2] = -sin(env->trans.angley);
 	env->trans.rotatey[8] = sin(env->trans.angley);
 	env->trans.rotatey[10] = cos(env->trans.angley);
+}
+
+void					ft_texture_interpolation(t_scop *env)
+{
+	if (env->event.texture == 1 && env->event.interpolate < 1.00)
+		env->event.interpolate += 0.01;
+	if (env->event.texture == 0 && env->event.interpolate > 0.00)
+		env->event.interpolate -= 0.01;
 }
 
 uint32_t			ft_run(t_scop *env)
@@ -129,8 +137,10 @@ uint32_t			ft_run(t_scop *env)
 	glBindTexture(GL_TEXTURE_2D, 0);
 	SDL_FreeSurface(texture);
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 	while (env->event.run)
 	{
+		ft_texture_interpolation(env);
 		while (SDL_PollEvent(&e))
 			ft_keys_event(env, e, state);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -6,7 +6,7 @@
 #    By: allallem <allallem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/25 14:33:47 by allallem          #+#    #+#              #
-#    Updated: 2019/08/27 11:08:24 by allallem         ###   ########.fr        #
+#    Updated: 2019/09/02 16:45:32 by allallem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC		= main.c\
 				ft_mat4_multiplication.c\
 				ft_update_opengl.c\
 				ft_shader_functions.c\
-				ft_load_source.c
+				ft_load_source.c\
+				ft_average.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC))
 

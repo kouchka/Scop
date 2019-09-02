@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 13:30:31 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/31 12:47:09 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/02 16:44:46 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ uint32_t			ft_scop(t_scop *env, char *name)
 	if (!ft_init_glew(env))
 		return (0);
 	env->event.run = 1;
+	ft_center(env);
 	ft_run(env);
 	return (1);
 }

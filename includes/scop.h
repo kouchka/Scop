@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/31 15:13:35 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/02 16:45:17 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 typedef struct		s_event
 {
+	float		interpolate;
+	uint8_t texture;
 	uint8_t run;
 	uint8_t rotate;
 	int32_t x;
@@ -66,6 +68,7 @@ typedef struct			s_scop
 int32_t			ft_allocate_env(t_scop *env);
 int32_t			ft_fill_env(t_scop *env, char *file_name);
 char				*LoadSource(const char *filename);
+void				ft_center(t_scop *env);
 
 /*
 ** initialisation + running
