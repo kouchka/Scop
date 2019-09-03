@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 16:44:52 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/02 16:44:57 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 09:38:24 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void					ft_average(t_scop *env, int position)
 		average += env->point[index][position];
 		index++;
 	}
-	average = average / env->point_number;
+	average = (average / env->point_number);
 	index = 0;
 	while (index < env->point_number)
 	{

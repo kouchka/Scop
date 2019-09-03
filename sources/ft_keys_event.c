@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:27:42 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/02 16:49:39 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 10:04:11 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ uint32_t			ft_texture(t_scop *env)
 		env->event.texture = 0;
 	else
 		env->event.texture = 1;
+
 	return (1);
 }
 
@@ -112,5 +113,10 @@ uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state)
 		return (ft_rotate_keys(env, state));
 	if (state[SDL_SCANCODE_T] && e.key.type == SDL_KEYDOWN && !e.key.repeat)
 		return (ft_texture(env));
+	if (state[SDL_SCANCODE_L] && e.key.type == SDL_KEYDOWN && !e.key.repeat
+		&& !env->event.line)
+		env->event.line = 1;
+	else if (state[SDL_SCANCODE_L] && e.key.type == SDL_KEYDOWN && !e.key.repeat)
+		env->event.line = 0;
 	return (1);
 }

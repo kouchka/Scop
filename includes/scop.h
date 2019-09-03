@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/02 16:45:17 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 10:02:43 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_event
 {
 	float		interpolate;
 	uint8_t texture;
+	uint8_t line;
 	uint8_t run;
 	uint8_t rotate;
 	int32_t x;

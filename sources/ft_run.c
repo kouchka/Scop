@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:26:41 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/02 15:57:18 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:29:02 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,48 @@ void					ft_texture_interpolation(t_scop *env)
 		env->event.interpolate += 0.01;
 	if (env->event.texture == 0 && env->event.interpolate > 0.00)
 		env->event.interpolate -= 0.01;
+	if (env->event.line)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	if (!env->event.line)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void					ft_bind_color(t_scop *env)
+{
+	float c_buff[env->link_number * 9];
+	GLuint colorbuffer;
+	uint32_t	i;
+	uint32_t	j;
+	float			color;
+
+	i = 0;
+	j = 0;
+	while (j < env->link_number && ((i + 9) < (env->link_number * 9)))
+	{
+		if (j % 3 == 1)
+			color = 0.0;
+		if (j % 3 == 2)
+			color = 0.2;
+		if (j % 3 == 0)
+			color = 0.4;
+		c_buff[i] = color;
+		c_buff[i + 1] = color;
+		c_buff[i + 2] = color;
+		c_buff[i + 3] = color;
+		c_buff[i + 4] = color;
+		c_buff[i + 5] = color;
+		c_buff[i + 6] = color;
+		c_buff[i + 7] = color;
+		c_buff[i + 8] = color;
+		i += 9;
+		j++;
+	}
+	glGenBuffers(1, &colorbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(c_buff), c_buff, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
 uint32_t			ft_run(t_scop *env)
@@ -99,7 +141,7 @@ uint32_t			ft_run(t_scop *env)
 	/*
 	** chargement image
 	*/
-	if (!(texture = IMG_Load("ceramique.jpg")))
+	if (!(texture = IMG_Load("cat.jpg")))
 	{
 		ft_printf("%s\n", SDL_GetError());
 		return (0);
@@ -138,11 +180,13 @@ uint32_t			ft_run(t_scop *env)
 	SDL_FreeSurface(texture);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+	ft_bind_color(env);
 	while (env->event.run)
 	{
 		ft_texture_interpolation(env);
 		while (SDL_PollEvent(&e))
 			ft_keys_event(env, e, state);
+		glClearColor(1.0f, 1.00f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(program);
 		glBindTexture(GL_TEXTURE_2D, texture_id);

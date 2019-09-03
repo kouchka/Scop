@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 13:30:31 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/02 16:44:46 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 12:24:26 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,24 @@ uint32_t			ft_init_window(t_scop *env, char *name)
 	return (SUCCESS);
 }
 
+void					ft_identity_init(float *mat, float value)
+{
+	mat[0] = value;
+	mat[5] = value;
+	mat[10] = value;
+	mat[15] = value;
+}
+
 void					ft_assign_vecs(t_scop *env)
 {
-	env->trans.vecs[0] = 1.0;
-	env->trans.vecs[5] = 1.0;
-	env->trans.vecs[10] = 1.0;
-	env->trans.vecs[15] = 1.0;
-	env->trans.rotatex[0] = 1.0;
-	env->trans.rotatex[5] = 1.0;
-	env->trans.rotatex[10] = 1.0;
-	env->trans.rotatex[15] = 1.0;
-	env->trans.rotatey[0] = 1.0;
-	env->trans.rotatey[5] = 1.0;
-	env->trans.rotatey[10] = 1.0;
-	env->trans.rotatey[15] = 1.0;
-	env->trans.rotatez[0] = 1.0;
-	env->trans.rotatez[5] = 1.0;
-	env->trans.rotatez[10] = 1.0;
-	env->trans.rotatez[15] = 1.0;
-	env->trans.rotate[0] = 1.0;
-	env->trans.rotate[5] = 1.0;
-	env->trans.rotate[10] = 1.0;
-	env->trans.rotate[15] = 1.0;
+	ft_identity_init(env->trans.vecs, 1.0);
+	ft_identity_init(env->trans.rotatex, 1.0);
+	ft_identity_init(env->trans.rotatey, 1.0);
+	ft_identity_init(env->trans.rotatez, 1.0);
+	ft_identity_init(env->trans.rotate, 1.0);
+	env->trans.vecs[0] -= 0.7;
+	env->trans.vecs[5] -= 0.7;
+	env->trans.vecs[10] -= 0.7;
 }
 
 uint32_t			ft_scop(t_scop *env, char *name)
