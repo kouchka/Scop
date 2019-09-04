@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 16:44:52 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/03 09:38:24 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:40:21 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void					ft_average(t_scop *env, int position)
 {
-	long double average;
-	uint32_t index;
+	long double	average;
+	uint32_t	index;
 
 	index = 0;
 	average = 0;

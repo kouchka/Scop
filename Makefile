@@ -6,7 +6,7 @@
 #    By: allallem <allallem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/25 14:33:47 by allallem          #+#    #+#              #
-#    Updated: 2019/09/02 16:45:32 by allallem         ###   ########.fr        #
+#    Updated: 2019/09/04 10:39:14 by allallem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ HEADER = includes/
 SRC		= main.c\
 				ft_allocate_env.c\
 				ft_fill_env.c\
-				tests_functions.c\
 				ft_scop.c\
 				ft_run.c\
 				ft_keys_event.c\
@@ -33,7 +32,9 @@ SRC		= main.c\
 				ft_update_opengl.c\
 				ft_shader_functions.c\
 				ft_load_source.c\
-				ft_average.c
+				ft_average.c\
+				ft_attribute_vertices.c\
+				ft_bind_buffer.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC))
 

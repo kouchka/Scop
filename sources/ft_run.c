@@ -6,98 +6,12 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:26:41 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/03 13:29:02 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 10:42:03 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void					ft_attribute_vertices(t_scop *env, float *vertices)
-{
-	uint32_t	i;
-	uint32_t	j;
-
-	i = 0;
-	j = 0;
-	while (j < env->link_number && ((i + 9) < (env->link_number * 9)))
-	{
-		vertices[i] = env->point[env->triangle[j][0] - 1][0];
-		vertices[i + 1] = env->point[env->triangle[j][0] - 1][1];
-		vertices[i + 2] = env->point[env->triangle[j][0] - 1][2];
-		vertices[i + 3] = env->point[env->triangle[j][1] - 1][0];
-		vertices[i + 4] = env->point[env->triangle[j][1] - 1][1];
-		vertices[i + 5] = env->point[env->triangle[j][1] - 1][2];
-		vertices[i + 6] = env->point[env->triangle[j][2] - 1][0];
-		vertices[i + 7] = env->point[env->triangle[j][2] - 1][1];
-		vertices[i + 8] = env->point[env->triangle[j][2] - 1][2];
-		i += 9;
-		j++;
-	}
-}
-
-void					ft_rotate(t_scop *env)
-{
-	if (!env->event.rotate)
-		return ;
-	env->time.current_time = SDL_GetTicks();
-	env->time.ellapsed_time = env->time.current_time - env->time.last_time;
-	env->time.last_time = env->time.current_time;
-	env->trans.angley += env->time.ellapsed_time * 0.001;
-	env->trans.rotatey[0] = cos(env->trans.angley);
-	env->trans.rotatey[2] = -sin(env->trans.angley);
-	env->trans.rotatey[8] = sin(env->trans.angley);
-	env->trans.rotatey[10] = cos(env->trans.angley);
-}
-
-void					ft_texture_interpolation(t_scop *env)
-{
-	if (env->event.texture == 1 && env->event.interpolate < 1.00)
-		env->event.interpolate += 0.01;
-	if (env->event.texture == 0 && env->event.interpolate > 0.00)
-		env->event.interpolate -= 0.01;
-	if (env->event.line)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	if (!env->event.line)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-}
-
-void					ft_bind_color(t_scop *env)
-{
-	float c_buff[env->link_number * 9];
-	GLuint colorbuffer;
-	uint32_t	i;
-	uint32_t	j;
-	float			color;
-
-	i = 0;
-	j = 0;
-	while (j < env->link_number && ((i + 9) < (env->link_number * 9)))
-	{
-		if (j % 3 == 1)
-			color = 0.0;
-		if (j % 3 == 2)
-			color = 0.2;
-		if (j % 3 == 0)
-			color = 0.4;
-		c_buff[i] = color;
-		c_buff[i + 1] = color;
-		c_buff[i + 2] = color;
-		c_buff[i + 3] = color;
-		c_buff[i + 4] = color;
-		c_buff[i + 5] = color;
-		c_buff[i + 6] = color;
-		c_buff[i + 7] = color;
-		c_buff[i + 8] = color;
-		i += 9;
-		j++;
-	}
-	glGenBuffers(1, &colorbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(c_buff), c_buff, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-}
 
 uint32_t			ft_run(t_scop *env)
 {
@@ -180,7 +94,8 @@ uint32_t			ft_run(t_scop *env)
 	SDL_FreeSurface(texture);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
-	ft_bind_color(env);
+	ft_bind_color(env, 0, 0);
+	ft_bind_texture_coord(env);
 	while (env->event.run)
 	{
 		ft_texture_interpolation(env);

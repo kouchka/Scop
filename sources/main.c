@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:54:18 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/01 11:43:36 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:32:16 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			ft_free_env(t_scop *env)
 
 char			*ft_parse_line(char *line, t_scop *env)
 {
-	float			tmp;
+	float		tmp;
 	int32_t		tmp2;
 
 	if (line[0] == 'v' && (sscanf(line, "v %f %f %f",
@@ -70,8 +70,8 @@ char			*ft_parse_line(char *line, t_scop *env)
 int32_t			ft_parse_obj(char *file_name, t_scop *env)
 {
 	FILE	*file;
-	char line[60];
-	char *result;
+	char	line[60];
+	char	*result;
 
 	if (!(file = fopen(file_name, "r")))
 	{
@@ -100,10 +100,7 @@ int32_t			main(int argc, char **argv)
 		ft_bzero(&env, sizeof(t_scop));
 		if (ft_parse_obj(argv[1], &env) && env.point_number && env.link_number
 			&& ft_allocate_env(&env) && ft_fill_env(&env, argv[1]))
-		{
-			// ft_print_table(&env);
 			ft_scop(&env, argv[1]);
-		}
 		else
 			ft_printf("Error while parsing object\n");
 	}

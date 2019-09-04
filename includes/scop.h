@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/03 10:02:43 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 10:44:15 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,25 @@
 
 # define TETA 0.2
 
-typedef struct		s_event
+typedef struct			s_event
 {
-	float		interpolate;
-	uint8_t texture;
-	uint8_t line;
-	uint8_t run;
-	uint8_t rotate;
-	int32_t x;
-	int32_t y;
+	float				interpolate;
+	uint8_t				texture;
+	uint8_t				line;
+	uint8_t				run;
+	uint8_t				rotate;
+	int32_t				x;
+	int32_t				y;
+}						t_event;
 
-}									t_event;
-
-typedef struct		s_time
+typedef struct			s_time
 {
-	uint32_t		last_time;
-	uint32_t		current_time;
-	uint32_t		ellapsed_time;
-}									t_time;
+	uint32_t			last_time;
+	uint32_t			current_time;
+	uint32_t			ellapsed_time;
+}						t_time;
 
-typedef struct		s_transformation
+typedef struct			s_transformation
 {
 	float				rotatex[16];
 	float				rotatey[16];
@@ -48,63 +47,62 @@ typedef struct		s_transformation
 	float				anglex;
 	float				angley;
 	float				anglez;
-}									t_transformation;
+}						t_transformation;
 
 typedef struct			s_scop
 {
-	t_window					sdl;
-	t_event						event;
+	t_window			sdl;
+	t_event				event;
 	t_transformation	trans;
-	t_time						time;
-	float							**point;
-	uint32_t					**triangle;
-	uint32_t					point_number;
-	uint32_t					link_number;
-}										t_scop;
+	t_time				time;
+	float				**point;
+	uint32_t			**triangle;
+	uint32_t			point_number;
+	uint32_t			link_number;
+}						t_scop;
 
 /*
 ** parsing
 */
 
-int32_t			ft_allocate_env(t_scop *env);
-int32_t			ft_fill_env(t_scop *env, char *file_name);
-char				*LoadSource(const char *filename);
-void				ft_center(t_scop *env);
+int32_t					ft_allocate_env(t_scop *env);
+int32_t					ft_fill_env(t_scop *env, char *file_name);
+char					*ft_loadsource(const char *filename);
+void					ft_center(t_scop *env);
+void					ft_attribute_vertices(t_scop *env, float *vertices);
 
 /*
 ** initialisation + running
 */
 
-uint32_t		ft_scop(t_scop *env, char *name);
-uint32_t		ft_run(t_scop *env);
-void				ft_update_data(t_scop *env, GLuint program);
+void					ft_bind_texture_coord(t_scop *env);
+void					ft_bind_color(t_scop *env, uint32_t i, uint32_t j);
+uint32_t				ft_scop(t_scop *env, char *name);
+uint32_t				ft_run(t_scop *env);
+void					ft_update_data(t_scop *env, GLuint program);
+void					ft_texture_interpolation(t_scop *env);
 
 /*
 ** shader/program functions
 */
 
-uint32_t		ft_create_shader(GLuint *shader, char *file_name,
+uint32_t				ft_create_shader(GLuint *shader, char *file_name,
 		GLint compile_status, GLuint options);
-uint32_t		ft_create_program(GLuint *program, GLuint *vertex, GLuint *frag,
-		GLint compile_status);
+uint32_t				ft_create_program(GLuint *program, GLuint *vertex,
+	GLuint *frag, GLint compile_status);
 
 /*
 ** event functions
 */
 
-uint32_t		ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *state);
+uint32_t				ft_keys_event(t_scop *env, SDL_Event e,
+	const uint8_t *state);
 
 /*
 ** matrix calculation
 */
 
-void				ft_mat4_multiplication(float *m, float *m1, float *m2);
-
-/*
-** functions to remove (used for tests)
-*/
-
-void				ft_print_table(t_scop *env);
-void				ft_check_mat4(float *mat4);
+void					ft_mat4_multiplication(float *m, float *m1, float *m2);
+void					ft_rotate(t_scop *env);
 
 #endif

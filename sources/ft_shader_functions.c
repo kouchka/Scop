@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 15:00:54 by allallem          #+#    #+#             */
-/*   Updated: 2019/08/26 15:01:14 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:38:33 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ uint32_t			ft_create_shader(GLuint *shader, char *file_name,
 	GLint logsize;
 	char *str;
 
-	if (!(str = LoadSource(file_name)))
+	if (!(str = ft_loadsource(file_name)))
 		return 0;
 	if (!(*shader = glCreateShader(options)))
 		return (0);

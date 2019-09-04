@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 13:30:31 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/03 12:24:26 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:34:55 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ uint32_t			ft_init_window(t_scop *env, char *name)
 	return (SUCCESS);
 }
 
-void					ft_identity_init(float *mat, float value)
+void				ft_identity_init(float *mat, float value)
 {
 	mat[0] = value;
 	mat[5] = value;
@@ -43,7 +43,7 @@ void					ft_identity_init(float *mat, float value)
 	mat[15] = value;
 }
 
-void					ft_assign_vecs(t_scop *env)
+void				ft_assign_vecs(t_scop *env)
 {
 	ft_identity_init(env->trans.vecs, 1.0);
 	ft_identity_init(env->trans.rotatex, 1.0);
@@ -62,7 +62,8 @@ uint32_t			ft_scop(t_scop *env, char *name)
 		return (0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
+		SDL_GL_CONTEXT_PROFILE_CORE);
 	if (!ft_sdl_create_window(&env->sdl, SDL_WINDOW_OPENGL))
 	{
 		ft_quit_sdl(&env->sdl.win, &env->sdl.ren, 0);
