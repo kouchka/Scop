@@ -6,7 +6,7 @@
 #    By: allallem <allallem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/25 14:33:47 by allallem          #+#    #+#              #
-#    Updated: 2019/09/04 10:39:14 by allallem         ###   ########.fr        #
+#    Updated: 2019/09/04 11:47:17 by allallem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRC		= main.c\
 				ft_load_source.c\
 				ft_average.c\
 				ft_attribute_vertices.c\
-				ft_bind_buffer.c
+				ft_bind_buffer.c\
+				ft_texture.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC))
 

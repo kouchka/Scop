@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:27:42 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/04 10:15:25 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 10:49:48 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,6 @@ uint32_t			ft_keys_event(t_scop *env, SDL_Event e, const uint8_t *s)
 		env->trans.vecs[13] += -env->trans.vecs[0];
 	if (s[SDL_SCANCODE_LEFT])
 		env->trans.vecs[12] += -env->trans.vecs[0];
-	if (s[SDL_SCANCODE_UP])
-		env->trans.vecs[14] += -env->trans.vecs[0];
-	if (s[SDL_SCANCODE_DOWN])
-		env->trans.vecs[14] -= -env->trans.vecs[0];
 	if (e.type == SDL_MOUSEWHEEL)
 		return (ft_homotethie(env, e));
 	if (s[SDL_SCANCODE_X] || s[SDL_SCANCODE_Y] || s[SDL_SCANCODE_Z])

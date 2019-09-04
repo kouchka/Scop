@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/04 10:44:15 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 11:50:45 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,19 @@ typedef struct			s_scop
 	t_transformation	trans;
 	t_time				time;
 	float				**point;
+	float				*vertices;
 	uint32_t			**triangle;
 	uint32_t			point_number;
 	uint32_t			link_number;
+	GLuint				vertex;
+	GLuint				frag;
+	GLuint				program;
+	GLuint				texture_id;
+	GLuint				vao;
+	GLuint				vbo;
+	GLenum				formatinterne;
+	GLenum				format;
+	SDL_Surface		*texture;
 }						t_scop;
 
 /*
@@ -75,6 +85,7 @@ void					ft_attribute_vertices(t_scop *env, float *vertices);
 ** initialisation + running
 */
 
+uint32_t				ft_load_texture(t_scop *env);
 void					ft_bind_texture_coord(t_scop *env);
 void					ft_bind_color(t_scop *env, uint32_t i, uint32_t j);
 uint32_t				ft_scop(t_scop *env, char *name);
