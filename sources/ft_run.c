@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 14:26:41 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/04 11:52:55 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 12:08:38 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ uint8_t				ft_shader_vertices(t_scop *env)
 		return (0);
 	}
 	ft_bind_vertices(env);
-	ft_load_texture(env);
+	if (!ft_load_texture(env))
+		return (0);
 	return (1);
 }
 

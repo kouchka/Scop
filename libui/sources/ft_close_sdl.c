@@ -6,18 +6,19 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:50:39 by allallem          #+#    #+#             */
-/*   Updated: 2019/05/24 15:20:48 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 11:56:31 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libui.h"
 
-void			ft_quit_ttf(void)
+void		ft_quit_ttf(void)
 {
-	TTF_Quit();	
+	TTF_Quit();
 }
 
-int32_t		ft_quit_sdl(SDL_Window **win, SDL_Renderer **ren, SDL_Surface **image)
+int32_t		ft_quit_sdl(SDL_Window **win, SDL_Renderer **ren,
+	SDL_Surface **image)
 {
 	if (*ren)
 		SDL_DestroyRenderer(*ren);

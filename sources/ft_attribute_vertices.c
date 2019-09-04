@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 10:37:36 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/04 10:41:15 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 12:06:00 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		ft_attribute_vertices(t_scop *env, float *vertices)
 
 	i = 0;
 	j = 0;
-	while (j < env->link_number && ((i + 9) < (env->link_number * 9)))
+	while (j < env->link_number && ((i + 9) <= (env->link_number * 9)))
 	{
 		vertices[i] = env->point[env->triangle[j][0] - 1][0];
 		vertices[i + 1] = env->point[env->triangle[j][0] - 1][1];

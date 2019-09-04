@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/04 11:50:45 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 11:55:45 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct			s_scop
 	GLuint				vbo;
 	GLenum				formatinterne;
 	GLenum				format;
-	SDL_Surface		*texture;
+	SDL_Surface			*texture;
 }						t_scop;
 
 /*

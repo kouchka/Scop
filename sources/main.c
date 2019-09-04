@@ -6,19 +6,12 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:54:18 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/04 10:58:35 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/04 12:03:42 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-/*
-__attribute__((destructor))
-void			test_leaks()
-{
-	while (1);
-}
-*/
 void			ft_free_env(t_scop *env)
 {
 	uint32_t j;
