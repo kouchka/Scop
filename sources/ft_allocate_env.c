@@ -55,19 +55,20 @@ int32_t		ft_allocate_env(t_scop *env)
 	uint32_t	i;
 
 	i = 0;
-	if (!(env->point = malloc(sizeof(float *) * env->point_number))
-			|| !(env->triangle = malloc(sizeof(uint32_t *) * env->link_number)))
+	if (!(env->point = ft_memalloc(sizeof(float *) * env->point_number))
+			|| !(env->triangle = ft_memalloc(sizeof(uint32_t *)
+				* env->link_number)))
 		return (0);
 	while (i < env->point_number)
 	{
-		if (!(env->point[i] = malloc(sizeof(float) * 3)))
+		if (!(env->point[i] = ft_memalloc(sizeof(float) * 3)))
 			return (ft_free_allocated(env, i - 1));
 		i++;
 	}
 	i = 0;
 	while (i < env->link_number)
 	{
-		if (!(env->triangle[i] = malloc(sizeof(uint32_t) * 3)))
+		if (!(env->triangle[i] = ft_memalloc(sizeof(uint32_t) * 3)))
 			return (ft_free_allocated_triangle(env, i - 1));
 		i++;
 	}

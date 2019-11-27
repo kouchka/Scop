@@ -28,7 +28,7 @@ void					ft_bind_color(t_scop *env, uint32_t i, uint32_t j)
 	GLuint	colorbuffer;
 	float	color;
 
-	while (j < env->link_number && ((i + 9) < (env->link_number * 9)))
+	while (j < env->link_number && ((i + 9) < (env->link_number * 9) + 1))
 	{
 		ft_assign_color(&color, j);
 		c_buff[i] = color;

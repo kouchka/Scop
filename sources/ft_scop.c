@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 13:30:31 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/03 13:34:55 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/17 14:36:31 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ uint32_t			ft_init_window(t_scop *env, char *name)
 		return (ERROR);
 	env->sdl.winpos_x = 50;
 	env->sdl.winpos_y = 50;
-	env->sdl.width = 1920;
-	env->sdl.height = 1080;
+	env->sdl.width = WIDTH;
+	env->sdl.height = HEIGHT;
 	return (SUCCESS);
 }
 
@@ -50,9 +50,9 @@ void				ft_assign_vecs(t_scop *env)
 	ft_identity_init(env->trans.rotatey, 1.0);
 	ft_identity_init(env->trans.rotatez, 1.0);
 	ft_identity_init(env->trans.rotate, 1.0);
-	env->trans.vecs[0] -= 0.7;
-	env->trans.vecs[5] -= 0.7;
-	env->trans.vecs[10] -= 0.7;
+	env->projection = ft_mat_perspective(0.67,
+		(float)(WIDTH / HEIGHT), 0.1, 100.0);
+	env->trans.vecs[14] = -10;
 }
 
 uint32_t			ft_scop(t_scop *env, char *name)

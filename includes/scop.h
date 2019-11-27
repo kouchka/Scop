@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 12:37:45 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/04 11:55:45 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/17 14:48:03 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # include <GL/glew.h>
 
 # define TETA 0.2
+# define WIDTH 1920
+# define HEIGHT 1080
+
+typedef struct			s_mat
+{
+	float				*array;
+	int					width;
+	int					height;
+}						t_mat;
 
 typedef struct			s_event
 {
@@ -55,6 +64,7 @@ typedef struct			s_scop
 	t_event				event;
 	t_transformation	trans;
 	t_time				time;
+	t_mat				*projection;
 	float				**point;
 	float				*vertices;
 	uint32_t			**triangle;
@@ -92,6 +102,8 @@ uint32_t				ft_scop(t_scop *env, char *name);
 uint32_t				ft_run(t_scop *env);
 void					ft_update_data(t_scop *env, GLuint program);
 void					ft_texture_interpolation(t_scop *env);
+t_mat					*ft_mat_perspective(float angle, float ratio,
+			float near, float far);
 
 /*
 ** shader/program functions

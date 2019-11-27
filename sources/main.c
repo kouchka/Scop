@@ -6,7 +6,7 @@
 /*   By: allallem <allallem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:54:18 by allallem          #+#    #+#             */
-/*   Updated: 2019/09/04 12:03:42 by allallem         ###   ########.fr       */
+/*   Updated: 2019/09/17 14:55:31 by allallem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void			ft_free_env(t_scop *env)
 	{
 		free(env->triangle[j]);
 		j++;
+	}
+	if (env->projection)
+	{
+		if (env->projection->array)
+			free(env->projection->array);
+		free(env->projection);
 	}
 	free(env->point);
 	free(env->triangle);
@@ -94,12 +100,14 @@ int32_t			main(int argc, char **argv)
 		ft_bzero(&env, sizeof(t_scop));
 		if (ft_parse_obj(argv[1], &env) && env.point_number && env.link_number
 			&& ft_allocate_env(&env) && ft_fill_env(&env, argv[1]))
+		{
 			ft_scop(&env, argv[1]);
+			ft_free_env(&env);
+		}
 		else
 			ft_printf("Error while parsing object\n");
 	}
 	else
 		ft_printf("usage : ./scop file.obj\n");
-	ft_free_env(&env);
 	return (SUCCESS);
 }
